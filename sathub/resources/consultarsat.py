@@ -29,15 +29,24 @@ from ..custom import request_parser
 logger = logging.getLogger('sathub.resource')
 
 parser = request_parser()
+parser.add_argument('codigo_ativacao', type=str, required=True)
+
+parser.add_argument('caminho_integrador',
+        type=str,
+        required=False,
+        help=u'Caminho do integrador da MFe')
 
 
 class ConsultarSAT(restful.Resource):
 
     def post(self):
         args = parser.parse_args()
-
         numero_caixa = args['numero_caixa']
-        fsat = instanciar_funcoes_sat(numero_caixa)
+        codigo_ativacao = args['codigo_ativacao']
+        caminho_integrador = args['caminho_integrador']
+
+        fsat = instanciar_funcoes_sat(
+			numero_caixa, codigo_ativacao, caminho_integrador)
         retorno = fsat.consultar_sat()
 
         if logger.isEnabledFor(logging.DEBUG):
