@@ -43,7 +43,7 @@ class VerificarStatusValidador(restful.Resource):
         args = parser.parse_args()
 
         numero_caixa = args['numero_caixa']
-        cpnj = args['cpnj']
+        cnpj = args['cnpj']
         id_fila = args['id_fila']
         chave_acesso_validador = args['chave_acesso_validador']
 
@@ -54,7 +54,7 @@ class VerificarStatusValidador(restful.Resource):
             )
         else:
             fvfpe = instanciar_funcoes_vfpe(numero_caixa)
-        retorno = fvfpe.verificar_status_validador(cpnj, id_fila)
+        retorno = fvfpe.verificar_status_validador(cnpj, id_fila)
 
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug('Retorno "EnviarDadosVenda" '
