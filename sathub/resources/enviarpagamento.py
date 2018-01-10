@@ -36,7 +36,6 @@ parser.add_argument('serial_pos', type=str, required=True)
 parser.add_argument('cnpjsh', type=str, required=True)
 parser.add_argument('bc_icms_proprio', type=str, required=True)
 parser.add_argument('valor', type=str, required=True)
-parser.add_argument('id_fila_validador', type=str, required=True)
 parser.add_argument('multiplos_pag', type=str, required=True)
 parser.add_argument('anti_fraude', type=str, required=True)
 parser.add_argument('moeda', type=str, required=True)
@@ -61,7 +60,6 @@ class EnviarPagamento(restful.Resource):
         cpnj = args['cnpjsh']
         icms_base = args['bc_icms_proprio']
         vr_total_venda = args['valor']
-        id_fila_validador = args['id_fila_validador']
         h_multiplos_pagamentos = args['multiplos_pag']
         h_anti_fraude = args['anti_fraude']
         cod_moeda = args['moeda']
@@ -76,7 +74,7 @@ class EnviarPagamento(restful.Resource):
             fvfpe = instanciar_funcoes_vfpe(numero_caixa)
         retorno = fvfpe.enviar_pagamento(
             chave_requisicao, estabecimento, serial_pos, cpnj, icms_base,
-            vr_total_venda, id_fila_validador, h_multiplos_pagamentos,
+            vr_total_venda, h_multiplos_pagamentos,
             h_anti_fraude,cod_moeda, origem_pagemento
         )
 

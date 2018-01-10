@@ -22,7 +22,7 @@ import logging
 from flask.ext import restful
 
 from ..comum.util import hexdump
-from ..comum.util import instanciar_funcoes_sat
+from ..comum.util import instanciar_funcoes_vfpe
 from ..custom import request_parser
 
 
@@ -30,10 +30,11 @@ logger = logging.getLogger('sathub.resource')
 
 parser = request_parser()
 
-parser.add_argument('dados_venda',
-        type=str,
-        required=True,
-        help=u'XML contendo os dados do CF-e de venda')
+parser.add_argument('numero_caixa',type=str,required=True)
+parser.add_argument('cnpj',type=str,required=True)
+parser.add_argument('id_fila',type=str,required=True)
+parser.add_argument('chave_acesso_validador',type=str,required=True)
+parser.add_argument('caminho_integrador',type=str,required=False)
 
 
 class VerificarStatusValidador(restful.Resource):
@@ -44,9 +45,16 @@ class VerificarStatusValidador(restful.Resource):
         numero_caixa = args['numero_caixa']
         cpnj = args['cpnj']
         id_fila = args['id_fila']
+        chave_acesso_validador = args['chave_acesso_validador']
 
-        fsat = instanciar_funcoes_sat(numero_caixa)
-        retorno = fsat.verificar_status_validador(cpnj, id_fila)
+        if args.get('caminho_integrador'):
+            fvfpe = instanciar_funcoes_vfpe(
+                numero_caixa, chave_acesso_validador,
+                args['caminho_integrador']
+            )
+        else:
+            fvfpe = instanciar_funcoes_vfpe(numero_caixa)
+        retorno = fvfpe.verificar_status_validador(cpnj, id_fila)
 
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug('Retorno "EnviarDadosVenda" '
