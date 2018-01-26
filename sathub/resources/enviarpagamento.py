@@ -41,6 +41,7 @@ parser.add_argument('anti_fraude', type=str, required=True)
 parser.add_argument('moeda', type=str, required=True)
 parser.add_argument('origem_pagamento', type=str, required=True)
 parser.add_argument('chave_acesso_validador', type=str, required=True)
+parser.add_argument('numero_identificador', type=str)
 parser.add_argument('caminho_integrador',
         type=str,
         required=False,
@@ -64,6 +65,7 @@ class EnviarPagamento(restful.Resource):
         h_anti_fraude = args['anti_fraude']
         cod_moeda = args['moeda']
         origem_pagemento = args['origem_pagamento']
+        numero_identificador = args['numero_identificador']
 
         if args.get('caminho_integrador'):
             fvfpe = instanciar_funcoes_vfpe(
@@ -75,7 +77,7 @@ class EnviarPagamento(restful.Resource):
         retorno = fvfpe.enviar_pagamento(
             chave_requisicao, estabecimento, serial_pos, cpnj, icms_base,
             vr_total_venda, h_multiplos_pagamentos,
-            h_anti_fraude,cod_moeda, origem_pagemento
+            h_anti_fraude,cod_moeda, origem_pagemento, numero_identificador
         )
 
         if logger.isEnabledFor(logging.DEBUG):
