@@ -195,7 +195,6 @@ def instanciar_funcoes_vfpe(numero_caixa, chave_acesso_validador, caminho=conf.c
     )
     return funcoes_vfpe
 
-@memoize
 def instanciar_impressora(tipo_conexao, modelo, string_conexao):
 
     # TODO importar a impressora correta do tipo correto
