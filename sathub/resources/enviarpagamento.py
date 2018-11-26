@@ -73,11 +73,11 @@ class EnviarPagamento(restful.Resource):
                 args['caminho_integrador']
             )
         else:
-            fvfpe = instanciar_funcoes_vfpe(numero_caixa)
+            fvfpe = instanciar_funcoes_vfpe(numero_caixa, chave_acesso_validador)
         retorno = fvfpe.enviar_pagamento(
             chave_requisicao, estabecimento, serial_pos, cpnj, icms_base,
             vr_total_venda, h_multiplos_pagamentos,
-            h_anti_fraude,cod_moeda, origem_pagemento, numero_identificador
+            h_anti_fraude, cod_moeda, origem_pagemento
         )
 
         if logger.isEnabledFor(logging.DEBUG):

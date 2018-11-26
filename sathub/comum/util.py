@@ -192,7 +192,6 @@ def instanciar_funcoes_vfpe(numero_caixa, chave_acesso_validador, caminho=conf.c
     funcoes_vfpe = FuncoesVFPE(
         BibliotecaSAT(caminho),
         chave_acesso_validador=chave_acesso_validador,
-        numerador_sessao=instanciar_numerador_sessao(numero_caixa)
     )
     return funcoes_vfpe
 
