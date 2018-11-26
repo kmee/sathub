@@ -178,12 +178,13 @@ def instanciar_numerador_sessao(numero_caixa):
 
 
 @memoize
-def instanciar_funcoes_sat(numero_caixa, codigo_ativacao,
+def instanciar_funcoes_sat(numero_sessao='', codigo_ativacao='',
                            caminho=conf.caminho_biblioteca):
-    funcoes_sat = FuncoesSAT(BibliotecaSAT(caminho,
-                    convencao=conf.convencao_chamada),
-            codigo_ativacao=codigo_ativacao,
-            numerador_sessao=instanciar_numerador_sessao(numero_caixa))
+    funcoes_sat = FuncoesSAT(
+        BibliotecaSAT(caminho, convencao=conf.convencao_chamada),
+        codigo_ativacao=codigo_ativacao,
+        numerador_sessao=numero_sessao,
+    )
     return funcoes_sat
 
 @memoize

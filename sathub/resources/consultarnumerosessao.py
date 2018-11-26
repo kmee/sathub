@@ -36,25 +36,29 @@ parser.add_argument('numero_sessao',
         required=True,
         help=u'Número da sessão a ser consultada')
 
+parser.add_argument('codigo_ativacao',
+        type=str,
+        required=True,
+        help=u'Código de ativação')
+
 
 class ConsultarNumeroSessao(restful.Resource):
 
     def post(self):
         args = parser.parse_args()
 
-        numero_caixa = args['numero_caixa']
         numero_sessao = args['numero_sessao']
+        codigo_ativacao = args['codigo_ativacao']
 
-        abort(501) # FIXME: consultar número de sessão não implementado
-        # 501 - Server does not recognise method or lacks ability to fulfill
-        # NOTE: https://github.com/base4sistemas/satcfe
+        fsat = instanciar_funcoes_sat()
+        fsat._numerador_sessao = numero_sessao
+        fsat._codigo_ativacao = codigo_ativacao
 
-        fsat = instanciar_funcoes_sat(numero_caixa)
         retorno = fsat.consultar_numero_sessao(numero_sessao)
 
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug('Retorno "ConsultarNumeroSessao" '
-                    '(numero_caixa=%s, numero_sessao=%s)\n%s',
-                    numero_caixa, numero_sessao, hexdump(retorno))
+                    '(codigo_ativacao=%s, numero_sessao=%s)\n%s',
+                     codigo_ativacao, numero_sessao, hexdump(retorno))
 
         return dict(funcao='ConsultarNumeroSessao', retorno=retorno)
