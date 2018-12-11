@@ -4,5 +4,7 @@ Flask-RESTful == 0.3.3
 Flask-WTF == 0.12
 Unidecode == 0.04.19
 satcomum >= 0.0.9
-satcfe >= 0.0.8
 pyescpos >= 0.0.13
+-e git://github.com/kmee/mfecfe.git@feature/numero_sessao#egg=mfecfe
+
+
