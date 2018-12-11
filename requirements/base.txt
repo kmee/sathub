@@ -4,7 +4,10 @@ Flask-RESTful == 0.3.3
 Flask-WTF == 0.12
 Unidecode == 0.04.19
 satcomum >= 0.0.9
-pyescpos >= 0.0.13
+six==1.10.0
+-e git://github.com/kmee/satextrato.git@master#egg=satextrato
+-e git://github.com/kmee/pybrasil.git@master#egg=pybrasil
+-e git://github.com/kmee/satcfe.git@mfe#egg=satcfe
 -e git://github.com/kmee/mfecfe.git@feature/numero_sessao#egg=mfecfe
 
 
